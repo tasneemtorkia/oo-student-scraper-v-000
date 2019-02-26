@@ -22,7 +22,21 @@ attr_accessor :students
   end
  
  def self.scrape_profile_page(profile_url)
-    
+       doc = Nokogiri::HTML(open(profile_url))
+  end	    student = Hash.new
+
+
+     social_icons = doc.css("div.social-icon-container a").collect {|x| x.attribute("href").value}
+    social_icons.each do |social_icon|
+      if social_icon.include?("linkedin")
+        student[:linkedin] = social_icon
+      elsif social_icon.include?("github")
+        student[:github] = social_icon
+      elsif social_icon.include?("twitter")
+        student[:twitter] = social_icon
+      else
+        student[:blog] = social_icon
+      end
  end  
  
 end

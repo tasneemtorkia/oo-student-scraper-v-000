@@ -22,7 +22,7 @@ attr_accessor :students
   end
  
  def self.scrape_profile_page(profile_url)
-    
+    "http://students.learn.co/" + student.css("a").attribute("href")
  end  
  
 end
